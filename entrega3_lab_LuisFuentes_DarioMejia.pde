@@ -1,6 +1,6 @@
 import ddf.minim.*;
 import grafica.*;
-PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30;
+PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30,img31,img32,img33,img34,img35;
 int t1, valor=1, etapa=0, una_sola_vez=0, cont, co=0, presionx=0, presionxd=0, contador=0, conteo=0, condicion=3, instrucciones_una_vez=0, grafica=0;
 String caso="sistema no amortiguado", t="", amplitud="", frecuencia="", fase_inicial="", pfinal="", vfinal="", tfinal="", masa="", elasticidad="", amortiguamiento="", caso_amortiguado="", angulo_de_fase="";
 boolean  kol=true, mm=true, aux=true, aux2=true, aux3=true, aux4=true, aux5=true, aux6=true, aux7=false, musica=false, presionar, aux_etapa31=true, aux_etapa32=true, aux_etapa33=true, posicion=false, velocidad=false, aceleracion=false, aux_posicion=true, parar=false, gra=false, gra2=false, gra3=false, screenshot=false;
@@ -64,6 +64,11 @@ void setup() {
   img28=loadImage("imagenes/descargar.png");
   img29=loadImage("imagenes/fondo_amortiguado.png");
   img30=loadImage("imagenes/exel.png");
+  img31=loadImage("imagenes/amortiguador.png");
+  img32=loadImage("imagenes/instruccion5.png");
+  img33=loadImage("imagenes/fondo10.png");
+  img34=loadImage("imagenes/fondo11.png");
+  img35=loadImage("imagenes/fondo20.png");
   audio=new Minim(this);
   reproducir=audio.loadFile("audio/audio1.mp3");
   boton=audio.loadFile("audio/audio2.mp3");
@@ -173,7 +178,7 @@ void draw() {
       menus(600, 588, "Fase inicial", 830, 610, 1080, 650, 650, 650, 715, 650, 750, 680, fase_inicial, 150);
     } else if (caso=="sistema amortiguado") {
       background(25, 25, 25);
-      image(img, 0, 0);
+      image(img33, 0, 0);
 
       //--------------------menu del timepo en sistema amortiguado-----------------------------        
       menus(600, 18, "Tiempo", 830, 50, 1080, 80, 650, 80, 715, 80, 750, 110, t, 170);
@@ -198,7 +203,7 @@ void draw() {
     }
     //---------------- menu de oscilaciones forzadas--------------------------- 
     else if (caso=="oscilaciones forzadas") {
-      image(img, 0, 0);
+      image(img34, 0, 0);
 
       //--------------------menu del timepo en sistema amortiguado-----------------------------        
       menus(600, 18, "Tiempo", 830, 50, 1080, 80, 650, 80, 715, 80, 750, 110, t, 170);
@@ -390,10 +395,10 @@ void draw() {
       plot2.setTitleText("V vs T");
       plot3.setTitleText("A vs T");
       image(img14, 0, 0);
-      image(img17, -10, 500, 400, 200);
-      image(img15, 100, 30, 150, 50);
-      image(img16, 75, 80, 200, y); 
-      image(img15, 90, y+80, 180, 120);
+      image(img15, 15, 30, 250, 50);
+      image(img31, 80, 80, 200, y); 
+      image(img16, -15, 80, 200, y); 
+      image(img15, 15, y+80, 250, 120);
 
       contador=contador+1;
 
@@ -406,14 +411,14 @@ void draw() {
         parar=true;
         textSize(20);
         fill(255, 255, 255);
-        text("tiempo: "+t1, 120, 60);
+        text("tiempo: "+t1, 90, 60);
         etapa=5;
       } else if (cont!=t1 && parar==false) {
         y=y-cambio;
         textSize(20);
       }
       fill(255, 255, 255);
-      text("tiempo: "+cont, 120, 60);
+      text("tiempo: "+cont, 90, 60);
       //calculo el tiempo por cada draw   
       if (contador==60) {
         cont=cont+1;
@@ -539,10 +544,10 @@ void draw() {
 
 
       image(img14, 0, 0);
-      image(img17, -10, 500, 400, 200);
-      image(img15, 100, 30, 150, 50);
-      image(img16, 75, 80, 200, y); 
-      image(img15, 90, y+80, 180, 120);
+      image(img15, 15, 30, 250, 50);
+      image(img31, 80, 80, 200, y); 
+      image(img16, -15, 80, 200, y); 
+      image(img15, 15, y+80, 250, 120);
 
       contador=contador+1;
 
@@ -555,14 +560,14 @@ void draw() {
         parar=true;
         textSize(20);
         fill(255, 255, 255);
-        text("tiempo: "+t1, 120, 60);
+        text("tiempo: "+t1, 90, 60);
         etapa=5;
       } else if (cont!=t1 && parar==false) {
         y=y-cambio;
         textSize(20);
       }
       fill(255, 255, 255);
-      text("tiempo: "+cont, 120, 60);
+      text("tiempo: "+cont, 90, 60);
       //calculo el tiempo por cada draw   
       if (contador==60) {
         cont=cont+1;
@@ -624,17 +629,17 @@ void draw() {
     image(img21, 1000, 50, 100, 100);
     instrucciones_una_vez=0;
   } else if (etapa==12) {
-    image(img24, 0, 0);
+    image(img25, 0, 0);
     image(img20, 100, 50, 100, 100);
     image(img21, 1000, 50, 100, 100);
     instrucciones_una_vez=0;
   } else if (etapa==13) {
-    image(img25, 0, 0);
+    image(img32, 0, 0);
     image(img20, 100, 50, 100, 100);
     image(img5, 350, 600, 500, 100);
     text("finalizar", 510, 670);
   } else if (etapa==5) {
-    image(img2, 0, 0);
+    image(img35, 0, 0);
 
 
     if ((caso=="oscilaciones forzadas" || caso=="sistema amortiguado" || caso=="sistema no amortiguado")&& kol==true) {
