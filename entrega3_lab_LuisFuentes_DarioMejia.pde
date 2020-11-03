@@ -396,7 +396,7 @@ void draw() {
       plot3.setTitleText("A vs T");
       image(img14, 0, 0);
       image(img15, 15, 30, 250, 50);
-      image(img31, 80, 80, 200, y); 
+      image(img31, 150, 80, 120, y); 
       image(img16, -15, 80, 200, y); 
       image(img15, 15, y+80, 250, 120);
 
@@ -545,7 +545,7 @@ void draw() {
 
       image(img14, 0, 0);
       image(img15, 15, 30, 250, 50);
-      image(img31, 80, 80, 200, y); 
+      image(img31, 150, 80, 120, y); 
       image(img16, -15, 80, 200, y); 
       image(img15, 15, y+80, 250, 120);
 
