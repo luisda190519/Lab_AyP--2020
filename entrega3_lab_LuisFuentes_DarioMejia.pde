@@ -1,11 +1,11 @@
 import ddf.minim.*;
 import grafica.*;
-PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30,img31,img32,img33,img34,img35;
+PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35;
 int t1, valor=1, etapa=0, una_sola_vez=0, cont, co=0, presionx=0, presionxd=0, contador=0, conteo=0, condicion=3, instrucciones_una_vez=0, grafica=0;
 String caso="sistema no amortiguado", t="", amplitud="", frecuencia="", fase_inicial="", pfinal="", vfinal="", tfinal="", masa="", elasticidad="", amortiguamiento="", caso_amortiguado="", angulo_de_fase="";
 boolean  kol=true, mm=true, aux=true, aux2=true, aux3=true, aux4=true, aux5=true, aux6=true, aux7=false, musica=false, presionar, aux_etapa31=true, aux_etapa32=true, aux_etapa33=true, posicion=false, velocidad=false, aceleracion=false, aux_posicion=true, parar=false, gra=false, gra2=false, gra3=false, screenshot=false;
 
-float bb, f_inicial, o, f, a, n2=1, presion_final, volumen_final, temperatura_final, x1, v, a1, t2, x2, x3, m, b1, k, resultado, resultado2, o1, max=450, min=100, f_angular, c1, d1, e1, f1;
+float bbb, bb, f_inicial, o, f, a, n2=1, presion_final, volumen_final, temperatura_final, x1, v, a1, t2, x2, x3, m, b1, k, resultado, resultado2, o1, max=450, min=100, f_angular, c1, d1, e1, f1;
 float posicionx, posiciony;
 float y=300, vel=3, cambio=vel, exponente, base, y1=0;
 
@@ -29,6 +29,9 @@ PFont font;
 
 int n, menos, funcion;
 double x, abajo, c, b, arriba, seno, cos;
+
+float[] panelDim = new float[] {800, 500};
+
 
 
 void setup() {
@@ -220,8 +223,11 @@ void draw() {
       menus(600, 588, "Constante de amortiguamiento", 750, 630, 1080, 650, 650, 650, 715, 650, 750, 680, amortiguamiento, 150);
 
 
-      //-----------------------------menu del angulo de fase--------------------------------------------      
-      menus(10, 588, "Frecuencia angular", 200, 630, 480, 650, 50, 650, 120, 650, 135, 680, frecuencia, 150);
+      //-----------------------------menu del angulo de fuerza impulsora--------------------------------------------      
+      menus(10, 588, "Fuerza impulsora", 200, 630, 480, 650, 50, 650, 120, 650, 135, 680, frecuencia, 150);
+
+      //-----------------------------menu del angulo de angulo de fase --------------------------------------------    
+      //menus(10, 398, "Angulo de fase", 200, 435, 480, 460, 50, 460, 120, 460, 135, 490, angulo_de_fase, 170);
     }
   }
 
@@ -578,15 +584,21 @@ void draw() {
         f_inicial=sqrt(k/m);
         f=sqrt(pow(f_inicial, 2)-pow(y1, 2));
 
-        c1=-(f_angular*(pow(f_inicial, 2)-pow(f, 2)))/(m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2)); 
-        d1=-(f_angular*y1*(pow(f, 2)+pow(f_inicial, 2)))/(f*m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2));
-
-        e1=-(f_angular*(pow(f_inicial, 2)-pow(f, 2)))/(m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2));
-        f1=(2*y1*f*f_angular)/((m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2)));
-
-        pos1[cont]=c1*cos(f_inicial*cont)+d1*sin(f_inicial*cont)+(f_angular)/ (m*(pow(f_inicial, 2)-pow(f, 2)))*cos(f*cont);
-        vel1[cont]=f_inicial*(-c1*sin(f_inicial*cont)+d1*cos(f_inicial*cont))-(f_angular*f)/(m*(pow(f_inicial, 2)-pow(f, 2)))*sin(f*cont);
-        ace1[cont]=-c1*pow(f_inicial, 2)*cos(f_inicial*cont)-d1*pow(f_inicial, 2)*sin(f_inicial*cont)-(f_angular*pow(f, 2)*cos(cont*f))/(m*pow(f_inicial, 2)-m*pow(f, 2));
+        /* c1=-(f_angular*(pow(f_inicial, 2)-pow(f, 2)))/(m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2)); 
+         d1=-(f_angular*y1*(pow(f, 2)+pow(f_inicial, 2)))/(f*m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2));
+         
+         e1=-(f_angular*(pow(f_inicial, 2)-pow(f, 2)))/(m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2));
+         f1=(2*y1*f*f_angular)/((m*(pow(pow(f_inicial, 2)-pow(f, 2), 2))+4*pow(y1, 2)*pow(f, 2)));
+         
+         pos1[cont]=c1*cos(f_inicial*cont)+d1*sin(f_inicial*cont)+(f_angular)/ (m*(pow(f_inicial, 2)-pow(f, 2)))*cos(f*cont);
+         vel1[cont]=f_inicial*(-c1*sin(f_inicial*cont)+d1*cos(f_inicial*cont))-(f_angular*f)/(m*(pow(f_inicial, 2)-pow(f, 2)))*sin(f*cont);
+         ace1[cont]=-c1*pow(f_inicial, 2)*cos(f_inicial*cont)-d1*pow(f_inicial, 2)*sin(f_inicial*cont)-(f_angular*pow(f, 2)*cos(cont*f))/(m*pow(f_inicial, 2)-m*pow(f, 2));
+         */
+        amplitud1[cont]=(f_angular/m)/(sqrt(pow(pow(f, 2)-pow(f_inicial, 2), 2)+4*pow(f, 2)*pow(y1, 2)));
+        // bbb=atan((pow(f, 2)-pow(f_inicial, 2))/(2*y1*f));
+        pos1[cont]=amplitud1[cont]*sin(f*cont+bbb); 
+        vel1[cont]=amplitud1[cont]*f*cos(f*cont+bbb);
+        ace1[cont]=-amplitud1[cont]*pow(f, 2)*sin(cont*f+bbb);
 
         if (round(vel1[cont])==0 &&  round(vel1[cont-1])==0  &&  round(vel1[cont-2])==0 &&  round(vel1[cont-3])==0&& cont>3) {
           parar=true;
@@ -652,17 +664,29 @@ void draw() {
 
 
     if (grafica==1 && gra==true) {
-      plot = new GPlot(this, 150, 80, 900, 600);
+      //plot = new GPlot(this, 150, 80, 900, 600);
+      plot.setDim(panelDim);
+      plot.setPos(150, 80);
+      plot.activatePanning();
+      plot.activateZooming(1.1, CENTER, CENTER);
       plot.setTitleText("P vs T");
       plot.setPoints(myArray);
       plot.defaultDraw();
     } else if (grafica==2 && gra2==true) {
-      plot2 = new GPlot(this, 150, 80, 900, 600);
+      //plot2 = new GPlot(this, 150, 80, 900, 600);
+      plot2.setDim(panelDim);
+      plot2.setPos(150, 80);
+      plot2.activatePanning();
+      plot2.activateZooming(1.1, CENTER, CENTER);
       plot2.setTitleText("V vs T");
       plot2.setPoints(myArray2);
       plot2.defaultDraw();
     } else if (grafica==3 && gra3==true) {
-      plot3 = new GPlot(this, 150, 80, 900, 600);
+      //plot3 = new GPlot(this, 150, 80, 900, 600);
+      plot3.setDim(panelDim);
+      plot3.setPos(150, 80);
+      plot3.activatePanning();
+      plot3.activateZooming(1.1, CENTER, CENTER);
       plot3.setTitleText("A vs T");
       plot3.setPoints(myArray3);
       plot3.defaultDraw();
@@ -671,41 +695,41 @@ void draw() {
 
     //-----------guardar las imagenes de las graficas--------------
     if (screenshot==true && grafica==1 && caso=="sistema no amortiguado") {      
-      descargar(plot, myArray, "sistema no amortiguado/P vs T.jpg", "datos sistema no amortiguado/P vs T.csv", table);
+      descargar(plot, myArray, "sistema no amortiguado/Posicion vs Tiempo/Grafica.jpg", "sistema no amortiguado/Posicion vs Tiempo/Datos.csv", table);
     }
 
     if (screenshot==true && grafica==2 && caso=="sistema no amortiguado") {   
-      descargar(plot2, myArray2, "sistema no amortiguado/V vs T.jpg", "datos sistema no amortiguado/V vs T.csv", table2);
+      descargar(plot2, myArray2, "sistema no amortiguado/Velocidad vs Tiempo/Grafica.jpg", "sistema no amortiguado/Velocidad vs Tiempo/Datos.csv", table2);
     }
 
     if (screenshot==true && grafica==3 && caso=="sistema no amortiguado") {
-      descargar(plot3, myArray3, "sistema no amortiguado/A vs T.jpg", "datos sistema no amortiguado/A vs T.csv", table3);
+      descargar(plot3, myArray3, "sistema no amortiguado/Aceleracion vs Tiempo/Grafica.jpg", "sistema no amortiguado/Aceleracion vs Tiempo/Datos.csv", table3);
     }
 
     //-----------------grafica de sistema amortiguado------------------------------- 
     if (screenshot==true && grafica==1 && caso=="sistema amortiguado") {
-      descargar(plot, myArray, "sistema amortiguado/P vs T.jpg", "datos sistema amortiguado/P vs T.csv", table);
+      descargar(plot, myArray, "sistema amortiguado/Posicion vs Tiempo/Grafica.jpg", "sistema amortiguado/Posicion vs Tiempo/Datos.csv", table);
     }
 
     if (screenshot==true && grafica==2 && caso=="sistema amortiguado") {
-      descargar(plot2, myArray2, "sistema amortiguado/V vs T.jpg", "datos sistema amortiguado/V vs T.csv", table2);
+      descargar(plot2, myArray2, "sistema amortiguado/Velocidad vs Tiempo/Grafica.jpg", "sistema amortiguado/Velocidad vs Tiempo/Datos.csv", table2);
     }
 
     if (screenshot==true && grafica==3 && caso=="sistema amortiguado") {
-      descargar(plot3, myArray3, "sistema amortiguado/A vs T.jpg", "datos sistema amortiguado/A vs T.csv", table3);
+      descargar(plot3, myArray3, "sistema amortiguado/Aceleracion vs Tiempo/Grafica.jpg", "sistema amortiguado/Aceleracion vs Tiempo/Datos.csv", table3);
     }
 
     //-----------------grafica de sistema oscilador forzado ------------------------------- 
     if (screenshot==true && grafica==1 && caso=="oscilaciones forzadas") {
-      descargar(plot, myArray, "oscilaciones forzadas/P vs T.jpg", "datos oscilaciones forzadas/P vs T.csv", table);
+      descargar(plot, myArray, "Oscilador forzado/Posicion vs Tiempo/Grafica.jpg", "Oscilador forzado/Posicion vs Tiempo/Datos.csv", table);
     }
 
     if (screenshot==true && grafica==2 && caso=="oscilaciones forzadas") {
-      descargar(plot2, myArray2, "oscilaciones forzadas/V vs T.jpg", "datos oscilaciones forzadas/V vs T.csv", table2);
+      descargar(plot2, myArray2, "Oscilador forzado/Velocidad vs Tiempo/Grafica.jpg", "Oscilador forzado/Velocidad vs Tiempo/Datos.csv", table2);
     }
 
     if (screenshot==true && grafica==3 && caso=="oscilaciones forzadas") {
-      descargar(plot3, myArray3, "oscilaciones forzadas/A vs T.jpg", "datos oscilaciones forzadas/A vs T.csv", table3);
+      descargar(plot3, myArray3, "Oscilador forzado/Aceleracion vs Tiempo/Grafica.jpg", "Oscilador forzado/Aceleracion vs Tiempo/Datos.csv", table3);
     }
 
 
@@ -839,9 +863,20 @@ void keyPressed() {
       aux5=false;
       f_angular=Float.parseFloat(frecuencia);
       etapa=3;
-      frecuencia=frecuencia+" rad/s";
+      frecuencia=frecuencia+" N";
     }
   }
+
+  //---------------------para ingresar los datos de la frecuencia angular ------------------------------------
+  /*if (cont==1 && key!=ENTER && key!=BACKSPACE&&keyCode != SHIFT && keyCode != CONTROL && keyCode != ALT&& aux6==true && aux3==false && aux2==false && aux==false  && caso=="oscilaciones forzadas" && aux4==false  && (key=='1' || key=='2' || key=='3' || key=='4' || key=='5' || key=='6' || key=='7' || key=='8' || key=='9' || key=='0' || key=='.' || key=='-')) {
+   angulo_de_fase=angulo_de_fase+key;
+   conteo=angulo_de_fase.length();
+   if (conteo>10) {
+   aux6=false;
+   bbb=Float.parseFloat(angulo_de_fase);
+   angulo_de_fase=angulo_de_fase+" °";
+   }
+   }*/
 }
 
 
@@ -1093,6 +1128,25 @@ void mouseClicked() {
       aux5=true;
     }
   }
+
+  /*// ------------------- los controles para el menu de la amplitud----------------------
+   if (mouseX>480 && mouseX<530 && mouseY>460 && mouseY<510 && etapa==2 && caso=="sistema amortiguado") {
+   amplitud="";
+   aux6=true;
+   }
+   
+   if (mouseX>50 && mouseX<100 && mouseY>460 && mouseY<510 && etapa==2 && aux4==false && aux3==false && aux2==false && aux==false && caso=="oscilaciones forzadas" && aux6==true) {
+   
+   try {
+   aux6=false;
+   bbb=Float.parseFloat(angulo_de_fase);
+   angulo_de_fase=angulo_de_fase+" ";
+   }
+   catch(Exception e) {
+   angulo_de_fase=" °";
+   aux6=true;
+   }
+   }*/
 
   // ------------------- los controles para el menu de la frecuencia angular----------------------
   if (mouseX>480 && mouseX<530 && mouseY>650 && mouseY<700 && etapa==2 && (caso=="sistema amortiguado"|| caso=="oscilaciones forzadas")) {
