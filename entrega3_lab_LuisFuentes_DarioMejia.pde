@@ -165,15 +165,15 @@ void draw() {
       image(img, 0, 0);
 
       //------------creacion del menu de tiempo------------------      
-      menus(600, 18, "tiempo", 830, 40, 1080, 80, 650, 80, 715, 80, 750, 110, t, 170);
+      menus(600, 18, "Tiempo", 830, 40, 1080, 80, 650, 80, 715, 80, 750, 110, t, 170);
 
 
       //-----------------creacion del menu de la amplitud--------------------      
-      menus(600, 208, "amplitud", 830, 230, 1080, 270, 650, 270, 715, 270, 750, 300, amplitud, 170);
+      menus(600, 208, "Amplitud", 830, 230, 1080, 270, 650, 270, 715, 270, 750, 300, amplitud, 170);
 
 
       //-------------------creacion del menu de la frecuencia--------------------
-      menus(600, 398, "frecuencia", 830, 420, 1080, 460, 650, 460, 715, 460, 750, 490, frecuencia, 170);
+      menus(600, 398, "Frecuencia", 830, 420, 1080, 460, 650, 460, 715, 460, 750, 490, frecuencia, 170);
 
 
 
@@ -340,7 +340,10 @@ void draw() {
         ace1[cont]=sin(f*cont+o);
         ace1[cont]=ace1[cont]*f*f*-a;
 
-
+        if (round(vel1[cont])==0 &&  round(vel1[cont-1])==0  &&  round(vel1[cont-2])==0 &&  round(vel1[cont-3])==0 && cont>3) {
+          parar=true;
+        }
+        
         graficas();
       }
       textSize(20);
