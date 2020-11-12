@@ -1,9 +1,9 @@
 import ddf.minim.*;
 import grafica.*;
-PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35;
+PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35, img36, img37;
 int t1, valor=1, etapa=0, una_sola_vez=0, cont, co=0, presionx=0, presionxd=0, contador=0, conteo=0, condicion=3, instrucciones_una_vez=0, grafica=0;
 String caso="sistema no amortiguado", t="", amplitud="", frecuencia="", fase_inicial="", pfinal="", vfinal="", tfinal="", masa="", elasticidad="", amortiguamiento="", caso_amortiguado="", angulo_de_fase="";
-boolean  kol=true, mm=true, aux=true, aux2=true, aux3=true, aux4=true, aux5=true, aux6=true, aux7=false, musica=false, presionar, aux_etapa31=true, aux_etapa32=true, aux_etapa33=true, posicion=false, velocidad=false, aceleracion=false, aux_posicion=true, parar=false, gra=false, gra2=false, gra3=false, screenshot=false;
+boolean  continuar=false, kol=true, mm=true, aux=true, aux2=true, aux3=true, aux4=true, aux5=true, aux6=true, aux7=false, musica=false, presionar, aux_etapa31=true, aux_etapa32=true, aux_etapa33=true, posicion=false, velocidad=false, aceleracion=false, aux_posicion=true, parar=false, gra=false, gra2=false, gra3=false, screenshot=false;
 
 float bbb, bb, f_inicial, o, f, a, n2=1, presion_final, volumen_final, temperatura_final, x1, v, a1, t2, x2, x3, m, b1, k, resultado, resultado2, o1, max=450, min=100, f_angular, c1, d1, e1, f1;
 float posicionx, posiciony;
@@ -72,6 +72,8 @@ void setup() {
   img33=loadImage("imagenes/fondo10.png");
   img34=loadImage("imagenes/fondo11.png");
   img35=loadImage("imagenes/fondo20.png");
+  img36=loadImage("imagenes/pausa.png");
+  img37=loadImage("imagenes/continuar.png");
   audio=new Minim(this);
   reproducir=audio.loadFile("audio/audio1.mp3");
   boton=audio.loadFile("audio/audio2.mp3");
@@ -290,8 +292,15 @@ void draw() {
       image(img15, 100, 30, 150, 50);
       image(img16, 75, 80, 200, 600-y);
       image(img15, 90, 680-y, 180, 120);
-      contador=contador+1;
 
+
+
+      if (continuar==false) {
+        image(img36, 260, 30, 50, 50);
+        contador=contador+1;
+      } else {
+        image(img37, 260, 30, 50, 50);
+      }
 
       if (t1==0) {
         parar=true;
@@ -304,12 +313,13 @@ void draw() {
         fill(255, 255, 255);
         text("tiempo: "+t1, 120, 60);
         etapa=5;
-      } else if (cont!=t1 && parar==false) {
+      } else if (cont!=t1 && parar==false && continuar==false) {
         y=y-cambio;
         textSize(20);
         fill(255, 255, 255);
-        text("tiempo: "+cont, 120, 60);
       }
+      fill(255, 255, 255);
+      text("tiempo: "+cont, 120, 60);
 
       //--------------cambios de velocidad--------------------------
       if (y>500) {
@@ -321,7 +331,7 @@ void draw() {
 
 
       //calculo el tiempo por cada draw   
-      if (contador==60) {
+      if (contador==60 && continuar==false) {
         cont=cont+1;
         if (cont!=t1) {
           contador=0;
@@ -343,7 +353,7 @@ void draw() {
         if (round(vel1[cont])==0 &&  round(vel1[cont-1])==0  &&  round(vel1[cont-2])==0 &&  round(vel1[cont-3])==0 && cont>3) {
           parar=true;
         }
-        
+
         graficas();
       }
       textSize(20);
@@ -409,7 +419,13 @@ void draw() {
       image(img16, -15, 80, 200, y); 
       image(img15, 15, y+80, 250, 120);
 
-      contador=contador+1;
+      if (continuar==false) {
+        image(img36, 260, 30, 50, 50);
+        contador=contador+1;
+      } else {
+        image(img37, 260, 30, 50, 50);
+      }
+
 
       if (t1==0) {
         parar=true;
@@ -422,14 +438,14 @@ void draw() {
         fill(255, 255, 255);
         text("tiempo: "+t1, 90, 60);
         etapa=5;
-      } else if (cont!=t1 && parar==false) {
+      } else if (cont!=t1 && parar==false && continuar==false) {
         y=y-cambio;
         textSize(20);
       }
       fill(255, 255, 255);
       text("tiempo: "+cont, 90, 60);
       //calculo el tiempo por cada draw   
-      if (contador==60) {
+      if (contador==60 && continuar==false) {
         cont=cont+1;
         if (cont!=t1) {
           contador=0;
@@ -558,7 +574,14 @@ void draw() {
       image(img16, -15, 80, 200, y); 
       image(img15, 15, y+80, 250, 120);
 
-      contador=contador+1;
+      if (continuar==false) {
+        image(img36, 260, 30, 50, 50);
+        contador=contador+1;
+      } else {
+        image(img37, 260, 30, 50, 50);
+      }
+
+
 
       if (t1==0) {
         parar=true;
@@ -571,14 +594,14 @@ void draw() {
         fill(255, 255, 255);
         text("tiempo: "+t1, 90, 60);
         etapa=5;
-      } else if (cont!=t1 && parar==false) {
+      } else if (cont!=t1 && parar==false && continuar==false) {
         y=y-cambio;
         textSize(20);
       }
       fill(255, 255, 255);
       text("tiempo: "+cont, 90, 60);
       //calculo el tiempo por cada draw   
-      if (contador==60) {
+      if (contador==60 && continuar==false) {
         cont=cont+1;
         if (cont!=t1) {
           contador=0;
@@ -995,27 +1018,13 @@ void mouseClicked() {
     }
   }
 
-
-  //----------------boton aceptar de la etapa 3----------------------------------------------------
-  if (mouseX>700 && mouseX<780 && mouseY>190 && mouseY<270 && etapa==3 && aux_etapa31==true) {
-    posicion=true;
-    aux_etapa31=false;
-    grafica=1;
-    gra=true;
-  }
-
-  if (mouseX>700 && mouseX<780 && mouseY>340 && mouseY<420 && etapa==3 && aux_etapa32==true) {
-    velocidad=true;
-    aux_etapa32=false;
-    grafica=2;
-    gra2=true;
-  }
-
-  if (mouseX>700 && mouseX<780 && mouseY>490 && mouseY<570 && etapa==3 && aux_etapa33==true) {
-    aceleracion=true;
-    aux_etapa33=false;
-    grafica=3;
-    gra3=true;
+  //--------------------pausar animacion----------------------------------------------------------------------------------
+  if (mouseX>260 && mouseX<310 && mouseY>30 && mouseY<80 && etapa==4 && (caso=="sistema no amortiguado" || caso=="sistema amortiguado" || caso=="oscilaciones forzadas")) {
+    if (continuar==false) {
+      continuar=true;
+    } else {
+      continuar=false;
+    }
   }
 
   if (mouseX>250 && mouseX<950 && mouseY>600 && mouseY<700 && etapa==3 && (aceleracion==true || posicion==true || velocidad==true)) {
