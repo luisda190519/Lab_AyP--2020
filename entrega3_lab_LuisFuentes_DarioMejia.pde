@@ -1,5 +1,6 @@
 import ddf.minim.*;
 import grafica.*;
+import java.lang.Math;
 PImage img, img2, img3, img4, img5, img6, img7, img8, img9, img10, img11, img12, img13, img14, img15, img16, img17, img18, img19, img20, img21, img22, img23, img24, img25, img26, img27, img28, img29, img30, img31, img32, img33, img34, img35, img36, img37;
 int t1, valor=1, etapa=0, una_sola_vez=0, cont, co=0, presionx=0, presionxd=0, contador=0, conteo=0, condicion=3, instrucciones_una_vez=0, grafica=0;
 String caso="sistema no amortiguado", t="", amplitud="", frecuencia="", fase_inicial="", pfinal="", vfinal="", tfinal="", masa="", elasticidad="", amortiguamiento="", caso_amortiguado="", angulo_de_fase="";
@@ -329,9 +330,9 @@ void draw() {
         cambio=-vel;
       }
 
-
       //calculo el tiempo por cada draw   
       if (contador==60 && continuar==false) {
+        graficas();
         cont=cont+1;
         if (cont!=t1) {
           contador=0;
@@ -353,8 +354,6 @@ void draw() {
         if (round(vel1[cont])==0 &&  round(vel1[cont-1])==0  &&  round(vel1[cont-2])==0 &&  round(vel1[cont-3])==0 && cont>3) {
           parar=true;
         }
-
-        graficas();
       }
       textSize(20);
       fill(255, 255, 255);
@@ -446,6 +445,7 @@ void draw() {
       text("tiempo: "+cont, 90, 60);
       //calculo el tiempo por cada draw   
       if (contador==60 && continuar==false) {
+        graficas();
         cont=cont+1;
         if (cont!=t1) {
           contador=0;
@@ -480,8 +480,6 @@ void draw() {
         if (round(vel1[cont])==0 &&  round(vel1[cont-1])==0  &&  round(vel1[cont-2])==0 &&  round(vel1[cont-3])==0&& cont>3) {
           parar=true;
         }
-
-        graficas();
       }
 
 
@@ -602,6 +600,7 @@ void draw() {
       text("tiempo: "+cont, 90, 60);
       //calculo el tiempo por cada draw   
       if (contador==60 && continuar==false) {
+        graficas();
         cont=cont+1;
         if (cont!=t1) {
           contador=0;
@@ -620,8 +619,8 @@ void draw() {
          vel1[cont]=f_inicial*(-c1*sin(f_inicial*cont)+d1*cos(f_inicial*cont))-(f_angular*f)/(m*(pow(f_inicial, 2)-pow(f, 2)))*sin(f*cont);
          ace1[cont]=-c1*pow(f_inicial, 2)*cos(f_inicial*cont)-d1*pow(f_inicial, 2)*sin(f_inicial*cont)-(f_angular*pow(f, 2)*cos(cont*f))/(m*pow(f_inicial, 2)-m*pow(f, 2));
          */
-        amplitud1[cont]=(f_angular/m)/(sqrt(pow(pow(f, 2)-pow(f_inicial, 2), 2)+4*pow(f, 2)*pow(y1, 2)));
-        // bbb=atan((pow(f, 2)-pow(f_inicial, 2))/(2*y1*f));
+        amplitud1[cont]=(1)/(m)*(f_angular)/(sqrt(pow(pow(f, 2)-pow(f_inicial, 2), 2)+4*pow(f, 2)*pow(y1, 2)));
+        bbb=atan((1)/(m)*(pow(f, 2)-pow(f_inicial, 2))/(2*y1*f));
         pos1[cont]=amplitud1[cont]*sin(f*cont+bbb); 
         vel1[cont]=amplitud1[cont]*f*cos(f*cont+bbb);
         ace1[cont]=-amplitud1[cont]*pow(f, 2)*sin(cont*f+bbb);
@@ -629,8 +628,6 @@ void draw() {
         if (round(vel1[cont])==0 &&  round(vel1[cont-1])==0  &&  round(vel1[cont-2])==0 &&  round(vel1[cont-3])==0&& cont>3) {
           parar=true;
         }
-
-        graficas();
       }
 
       //--------------cambios de velocidad--------------------------
